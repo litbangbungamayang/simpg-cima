@@ -1,0 +1,1 @@
+ALTER TABLE `m_potongan_do` CHANGE `nominal` `nominal` DOUBLE(100,2) DEFAULT 0 NULL; 

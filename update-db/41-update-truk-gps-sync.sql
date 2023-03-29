@@ -1,0 +1,1 @@
+ALTER TABLE `m_truk_gps` ADD COLUMN `id_gps_server` INT(50) DEFAULT 0 NULL AFTER `no_hp`;

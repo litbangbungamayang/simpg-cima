@@ -1,0 +1,3 @@
+INSERT INTO `tb_menu` (`module`, `menu_name`, `menu_type`, `role_id`, `deep`, `ordering`, `position`) VALUES ('distribusidigital', 'Distribusi SPTA', 'internal', '0', '0', '3', 'sidebar'); 
+
+UPDATE `tb_menu` SET `access_data` = '{\"1\":\"1\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\",\"12\":\"0\",\"13\":\"0\",\"14\":\"0\",\"15\":\"0\",\"16\":\"1\"}' , `entry_by` = '22' WHERE `module` = 'distribusidigital'; 

@@ -1,0 +1,23 @@
+
+<?php 
+	  include '../curl.php';
+?>
+			<style type="text/css">
+				a{
+					color: #333;
+				}
+				a:focus{
+					text-decoration: none;
+				}
+				.list-group-item {
+				    border: 1px solid rgba(0,0,0,.125);
+				}
+			</style>
+			<div class="tab2">
+			  <button class="tablinks2 active" onclick="openDashboard(event, 'belum');list_spta(0);">Belum Distribusi</button>
+			  <button class="tablinks2" onclick="openDashboard(event, 'sudah');list_spta(0);">Sudah Distribusi</button>
+			</div>
+			<!-- Tab content -->
+			<div id="belum" class="tabcontent2 active" style="display: block;padding-top: 45px;padding-bottom: 68px;">
+				<ul id="listspta" class="list-group">				
+

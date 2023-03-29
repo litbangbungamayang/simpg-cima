@@ -1,0 +1,1 @@
+ALTER TABLE `tb_logs_sync_done` CHANGE `id` `id` INT(100) NULL, DROP PRIMARY KEY; 

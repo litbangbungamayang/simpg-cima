@@ -1,0 +1,1 @@
+ALTER TABLE `t_spta` ADD INDEX (`hari_giling`), ADD INDEX (`tgl_timbang`), ADD INDEX (`tgl_giling`); 
