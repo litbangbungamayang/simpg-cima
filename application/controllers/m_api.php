@@ -27,4 +27,10 @@ class M_api extends SB_Controller
 			echo json_encode($resp);
 		}
 	}
+
+	function petak(){
+		$persno = $this->input->get('persno');
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->petak($persno);
+	}
 }
