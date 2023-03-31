@@ -75,4 +75,19 @@ class Mobilemodel extends CI_Model
     return json_encode($resp);
   }
 
+  public function truk($persno){
+    $query = "select tara.no_pol, tara.nama_supir 
+      from m_tara_truk tara
+        join t_relasi_truk_pta relasi on relasi.no_pol = tara.no_pol
+      where relasi.persno = ?";
+    $result_truk = $this->db->query($query, array($persno))->result();
+    $resp = (object) [
+          'success' => true,
+          'code' => 200,
+          'data' => $result_truk,
+          'message' => 'success get data truk' 
+        ];
+    return json_encode($resp);
+  }
+
 }

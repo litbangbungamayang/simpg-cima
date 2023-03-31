@@ -33,4 +33,10 @@ class M_api extends SB_Controller
 		$this->load->model('mobilemodel');
 		echo $this->mobilemodel->petak($persno);
 	}
+
+	function truk(){
+		$persno = $this->input->get('persno');
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->truk($persno);
+	}
 }
