@@ -35,8 +35,14 @@ class M_api extends SB_Controller
 	}
 
 	function truk(){
-		$persno = $this->input->get('persno');
+		$persno = $this->input->get('persno_pta');
 		$this->load->model('mobilemodel');
 		echo $this->mobilemodel->truk($persno);
+	}
+
+	function pta(){
+		$persno = $this->input->get('persno');
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->pta($persno);
 	}
 }

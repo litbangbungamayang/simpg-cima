@@ -221,6 +221,7 @@ function getTara(e,id){
 			data: {noreg:noreg},
 			dataType: 'json',
 			success: function (dat) {
+            	//alert(dat.data.kategori);
 				if(dat.stt == 1){
 					var kat = $('#kategori').val();
 					if(dat.data.kategori != kat.substring(0,2)){
@@ -233,7 +234,6 @@ function getTara(e,id){
 					}
 				}else{
 					$('#ptgs_angkutan').val('');
-					//alert('Kosong');
 				}
 			}
 		});

@@ -4,7 +4,7 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li><i class="fa fa-dashboard"></i><a href="<?php echo site_url('dashboard') ?>"> Dashboard </a></li>
-		<li><a href="<?php echo site_url('tselektor') ?>"><?php echo $pageTitle ?></a></li>
+		<li><a href="<?php echo site_url('tselektor_mobile') ?>"><?php echo $pageTitle ?></a></li>
 		<li class="active"> Form </li>
 	</ol>
 </section>
@@ -16,80 +16,73 @@
 					<ul class="parsley-error-list">
 						<?php echo $this->session->flashdata('errors');?>
 					</ul>
-					<form action="<?php echo site_url('tselektor/save/'); ?>" class='form-vertical'
-						parsley-validate='true' novalidate='true' id="frmSelektor" method="post" enctype="multipart/form-data" >
+					<form action="<?php echo site_url('tselektor_mobile/save'); ?>" class='form-vertical' parsley-validate='true' id="frmSelektor" novalidate="false" method="post" enctype="multipart/form-data" >
 						<div class="row">
 							<!-- Blok data SPTA -->
 							<div class="col-md-6">
 								<div class="form-group col-md-12" >
-									<label for="ipt" class=" control-label "> No SPTA  <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' placeholder='letakkan cursor disini untuk scan barcode'  id='no_spta' autocomplete="off" onkeyup="getNoSPTA(event,this.value)"  required />
+									<label for="ipt" class=" control-label "> Scan QR Code  <span class="asterix"> * </span>  </label>
+									<input type='text' class='form-control input-sm' placeholder='letakkan cursor disini untuk scan QR CODE'  id='no_spta' autocomplete="off" onkeyup="bacaQrcode(event,this.value)"  required />
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> Tgl Tebang  <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm date' name='tgl_tebang' value="<?php echo date('Y-m-d');?>"  required readonly />
+									<input type='text' class='form-control input-sm date' name='tgl_tebang' value="" id='tgl_tebang' required readonly />
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> Jam  <span class="asterix"> * </span>  </label>
-									<input type='text' max="5" class='form-control input-sm' name='jam_tebang' id='jam_tebang' placeholder="06:00"  required />
+									<input type='text' max="5" class='form-control input-sm' name='jam_tebang' id='jam_tebang' placeholder="06:00"  required readonly/>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" style="display:none">
 									<label for="ipt" class=" control-label ">Brix<span class="asterix"> * </span></label>
 									<input type='number' value="0" class='form-control input-sm' name='brix_sel'  required />
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" style="display:none">
 									<label for="ipt" class=" control-label "> Ph  <span class="asterix"> * </span>  </label>
 									<input type='number' value="0" class='form-control input-sm' name='ph_sel'  required />
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> Luas Tebang <span class="asterix"> * </span>  </label>
-									<input type='number' onkeyup="cekha(this.value)" class='form-control input-sm' name='ha_tertebang' id="hektar_tertebang"  required />
+									<input type='number' onkeyup="cekha(this.value)" class='form-control input-sm' name='ha_tertebang' id="hektar_tertebang"  required readonly/>
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> No Angkutan   <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' id='no_angkutan' name='no_angkutan' style="text-transform:uppercase" autocomplete="off"  onkeyup="getTara(event,this.value);" placeholder="NOMOR TRUK" required />
+									<input type='text' class='form-control input-sm' id='no_angkutan' name='no_angkutan' style="text-transform:uppercase" autocomplete="off"  onkeyup="getTara(this.value);" placeholder="NOMOR TRUK" required readonly/>
 								</div>
 								<div class="form-group col-md-12">
 									<label for="ipt" class=" control-label "> Petugas Angkut   <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' id='ptgs_angkutan' style="text-transform:uppercase" name='ptgs_angkutan' placeholder="NAMA SOPIR/OPERATOR" required />
-								</div>
-								<div class="form-group hidethis" style="display:none">
-									<label for="ipt" class=" control-label "> Id Selektor    </label>
-									<input type='number' class='form-control input-sm' id='id_selektor' name='id_selektor'/>
-								</div>
-								<div class="form-group hidethis " style="display:none;">
-									<label for="ipt" class=" control-label "> Id Spta  <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' name='id_spta' id='id_spta'  required />
+									<input type='text' class='form-control input-sm' id='ptgs_angkutan' style="text-transform:uppercase" name='ptgs_angkutan' placeholder="NAMA SOPIR/OPERATOR" required readonly/>
 								</div>
 							</div>
 							<!-- Blok data Mandor Tebang dan Premi -->
 							<div class="col-md-6">
 								<div class="form-group col-md-12" >
 									<label for="ipt" class=" control-label "> Mandor Tebang / Renteng  <span class="asterix"> * </span>  </label>
-									<select name='persno_mandor_tma'  rows='5' id='persno_mandor_tma' code='{$persno_mandor_tma}'
-									class='form-control input-sm  select2' style='width: 100%;' required  ></select>
+									<input type='text' class='form-control input-sm' name='persno_mandor_tma' id='persno_mandor_tma'  required readonly/>
 								</div>
 								<div class="form-group col-md-12" >
 									<label for="ipt" class=" control-label "> Kode Premi/Penalti    </label>
-									<input type='text' class='form-control input-sm' placeholder=''  name='no_trainstat'  id= "trainstat_input" value=""/>
+									<input type='text' class='form-control input-sm' placeholder=''  name='no_trainstat'  id= "trainstat_input" value="" readonly/>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="col-md-6">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" id="terbakar_sel1" name="terbakar_sel" value="1"class="checkbox"/><span style="color:white;background:red">TERBAKAR</span>
+											<input type="text" name="terbakar_sel" id="hid_terbakar_sel" value="0" style="display:none" />
+											<input type="checkbox" id="terbakar_sel" name="terbakar_sel" value="1"/><span style="color:white;background:red;">TERBAKAR</span>
 										</label>
 									</div>
 								</div>
 								<div class="from-group col-md-6">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" id="ditolak_sel1" name="ditolak_sel" value="1" class="checkbox"/><span style="color:white;background:black;">DITOLAK</span>
+											<input type="text" name="ditolak_sel" id="hid_ditolak_sel" value="0" style="display:none" />
+											<input type="checkbox" id="ditolak_sel" name="ditolak_sel" value="1" class="checkbox"/><span style="color:white;background:black;">DITOLAK</span>
 										</label>
 									</div>
 								</div>
 								<div class="from-group col-md-12">
 									<div class="checkbox">
 										<label>
+											<input type="text" name="trash_sel" id="hid_trash_sel" value="0" style="display:none" />
 											<input type="checkbox" id="trash_sel1" name="trash_sel" value="1" class="checkbox"/><span style="color:white;background:purple;">SAMPLE TRASH</span>
 										</label>
 									</div>
@@ -97,14 +90,14 @@
 								<div class="form-group col-md-6" style="display:none;">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" id="tes1" name="terbakar_sel" value="1" class="checkbox"/><span style="color:black;background:yellow;">DADUK</span>
+											<input type="checkbox" id="daduk_sel" name="daduk_sel" value="1" class="checkbox"/><span style="color:black;background:yellow;">DADUK</span>
 										</label>
 									</div>
 								</div>
 	              <div class="form-group col-md-6" style="display:none;">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" id="tes1" name="terbakar_sel" value="1"class="checkbox"/><span style="color:white;background:green;">PUCUK</span>
+											<input type="checkbox" id="pucuk_sel" name="pucuk_sel" value="1"class="checkbox"/><span style="color:white;background:green;">PUCUK</span>
 										</label>
 									</div>
 								</div>
@@ -119,15 +112,15 @@
 							<div class="col-md-6">
 								<div class="form-group col-md-12" >
 									<label for="ipt" class=" control-label "> Kode Blok / No Petak  <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' readonly  id='kode_petak'  required />
+									<input type='text' class='form-control input-sm' readonly  id='kode_petak' name="kode_blok"  required />
 								</div>
 								<div class="form-group  col-md-6" >
 									<label for="ipt" class=" control-label "> Kategori  <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' readonly  id='kategori'  required />
+									<input type='text' class='form-control input-sm' readonly  name="kategori" id='kategori'  required />
 								</div>
 								<div class="form-group  col-md-6" >
 									<label for="ipt" class=" control-label "> Afdeling  <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' readonly  id='afdeling'  required />
+									<input type='text' class='form-control input-sm' readonly  name="kode_afd" id='afdeling'  required />
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -137,47 +130,26 @@
 								</div>
 								<div class="form-group  col-md-6" >
 									<label for="ipt" class=" control-label "> Jenis Tebangan  <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' readonly  id='jenis_tebangan'  required />
+									<input type='text' class='form-control input-sm' readonly  name="jenis_tebangan" id='jenis_tebangan'  required />
 								</div>
 								<div class="form-group col-md-12" >
 									<label for="ipt" class=" control-label "> Kategori Tebangan  <span class="asterix"> * </span>  </label>
 									<input type='text' class='form-control input-sm' readonly  id='kat_tebangan'  required />
 								</div>
 							</div>
-							<!-- Hidden blok manual input -->
-							<div class="col-md-6" id="manual">
-								<div class="form-group  " >
-									<label for="ipt" class=" control-label "> No Harvester    </label>
-									<input type='text' class='form-control input-sm' name='no_hv'   />
-								</div>
-								<div class="form-group  " >
-									<label for="ipt" class=" control-label "> Op Harvester    </label>
-									<input type='text' class='form-control input-sm' name='op_hv'   />
-								</div>
-								<div class="form-group  " >
-									<label for="ipt" class=" control-label "> No S.tipping / No. NCT   </label>
-									<input type='text' class='form-control input-sm' name='no_stipping'   />
-								</div>
-								<div class="form-group  " >
-									<label for="ipt" class=" control-label "> Op S.tipping / Op. NCT   </label>
-									<input type='text' class='form-control input-sm' name='op_stipping'   />
-								</div>
-								<div class="form-group  mekanisasi" >
-									<label for="ipt" class=" control-label "> No Grab Loader    </label>
-									<input type='text' class='form-control input-sm' name='no_gl'   />
-								</div>
-								<div class="form-group  mekanisasi" >
-									<label for="ipt" class=" control-label "> Op Grab Loader    </label>
-									<input type='text' class='form-control input-sm' name='op_gl'   />
-								</div>
-							</div>
+							<!-- Hidden blok -->
+							<input type="text" name="persno" id="persno" style="display:none" />
+							<input type="text" name="tgl_do" id="tgl_do" style="display:none" />
+							<input type="text" name="jam_do" id="jam_do" style="display:none" />
+							<input type="text" name="no_hv" id="no_hv" style="display:none" />
+							<input type="text" name="op_hv" id="op_hv" style="display:none" />
+							<input type="text" name="no_st_gl" id="no_st_gl" style="display:none" />
+							<input type="text" name="op_st_gl" id="op_st_gl" style="display:none" />
 						</div>
 						<div style="clear:both"></div>
 						<div class="toolbar-line text-center">
-
-							<input type="submit" id="kliksubmit" name="submit" class="btn btn-primary btn-sm" value="<?php echo $this->lang->line('core.sb_submit'); ?>" readonly  style="display:none;"/>
-							<button type="button" onclick="getNoTruk()" name="submit" class="btn btn-primary btn-sm">Simpan</button>
-							<a href="<?php echo site_url('tselektor');?>" class="btn btn-sm btn-warning"><?php echo $this->lang->line('core.sb_cancel'); ?></a>
+							<input type="submit" value="Submit" name="submit" class="btn btn-primary btn-sm">
+							<a href="<?php echo site_url('tselektor_mobile');?>" class="btn btn-sm btn-warning"><?php echo $this->lang->line('core.sb_cancel'); ?></a>
 						</div>
 					</form>
 				</div>
@@ -211,32 +183,52 @@ $(document).ready(function() {
 });
 
 
-function getTara(e,id){
+function getTara(id){
 	noreg = id;
-
-	if(e.keyCode == 13 && noreg != ''){
+	if(noreg != ''){
 		$.ajax({
 			type: 'POST',
-			url: "<?php echo site_url('tselektor/cektara');?>",
+			url: "<?php echo site_url('tselektor_mobile/cektara');?>",
 			data: {noreg:noreg},
 			dataType: 'json',
 			success: function (dat) {
 				if(dat.stt == 1){
-					var kat = $('#kategori').val();
-					if(dat.data.kategori != kat.substring(0,2)){
-						alert("Truk "+dat.data.texts+" tidak bisa mengangkut SPTA ini ("+kat.substring(0,2)+")");
-						$('#no_angkutan').val('');
-						$('#ptgs_angkutan').val('');
-					}else{
-						$('#no_angkutan').val(dat.data.no_pol);
-						$('#ptgs_angkutan').val(dat.data.texts);
-					}
+					$('#no_angkutan').val(dat.data.no_pol);
+					$('#ptgs_angkutan').val(dat.data.nama_supir);
 				}else{
 					$('#ptgs_angkutan').val('');
-					//alert('Kosong');
 				}
 			}
 		});
+	}
+}
+
+function getPetak(kodePetak){
+	if(kodePetak != ''){
+		$.ajax({
+			type: 'POST',
+			url: "<?php echo site_url('tselektor_mobile/cekPetak');?>",
+			data: {kode_petak:kodePetak},
+			dataType: 'json',
+			success: function (data) {
+				$("#kategori").val(data.kepemilikan);
+				$("#afdeling").val(data.divisi);
+			}
+		});
+	}
+}
+
+function getPta(kodePta){
+	if(kodePta != ''){
+		$.ajax({
+			type: 'POST',
+			url: "<?php echo site_url('tselektor_mobile/cekPta'); ?>",
+			data: {kodePta:kodePta},
+			dataType: 'json',
+			success: function(data){
+				$("#persno_mandor_tma").val(data.Persno + '-' + data.name);
+			}
+		})
 	}
 }
 
@@ -272,7 +264,7 @@ success: function (dat) {
 }
 
 function getNoSPTA(e,nospta){
-nospta = nospta.toUpperCase();
+	nospta = nospta.toUpperCase();
 	if(e.keyCode == 13 && nospta != ''){
 		var x = nospta.split("-");
 		if(x[0] == '<?php echo CNF_PLANCODE;?>' && nospta.length == 18){
@@ -326,6 +318,64 @@ nospta = nospta.toUpperCase();
 		}
 	}
 }
+
+function bacaQrcode(e, qrcode){
+	qrcode = qrcode.toUpperCase();
+	params = new URLSearchParams(qrcode);
+	if(e.keyCode == 13 && qrcode != ''){
+		let objDataSpta = {};
+		params.forEach((value, key)=>{
+			//console.log(key, value);
+			if(objDataSpta[key] !== undefined){
+				objDataSpta[key] = [objDataSpta[key]];
+				objDataSpta[key].push(value);
+			} else {
+				objDataSpta[key] = value;
+			}
+		})
+		console.log(objDataSpta);
+		//assign ke form
+		tgl_tebang = new Date(objDataSpta.DATE+"T00:00:00.000Z");
+		tgl_tebang_str = tgl_tebang.getFullYear() + "-" + (tgl_tebang.getMonth() + 1).toString().padStart(2, "0") + "-" + tgl_tebang.getDate().toString().padStart(2, "0");
+		sisteb = objDataSpta.SISTEB;
+		switch (sisteb){
+			case "SEM":
+				sisteb = "SEMI MEKANIS";
+				break;
+			case "MAN":
+				sisteb = "MANUAL";
+				break;
+			case "TRN":
+				sisteb = "TRANSLOADING";
+				break;
+			case "MKS":
+				sisteb = "MEKANIS";
+				break;
+		}
+		$("#tgl_tebang").val(tgl_tebang_str);
+		$("#jam_tebang").val(objDataSpta.TIME);
+		$("#no_angkutan").val(objDataSpta.TRUK);
+		$("#kode_petak").val(objDataSpta.PETAK);
+		$("#hektar_tertebang").val(objDataSpta.LUAS);
+		$("#jenis_tebangan").val(sisteb);
+		$("#jenis_angkutan").val("TRUK");
+		$("#trainstat_input").val(objDataSpta.PREMI + "," + objDataSpta.PENALTI);
+		$("#kat_tebangan").val("TAPG");
+		$("#persno").val(objDataSpta.PTA);
+		if(objDataSpta.HIJAU == "N" && $("#terbakar_sel").is(":checked") === false){
+			$("#terbakar_sel").iCheck('toggle');
+		} else {
+			if(objDataSpta.HIJAU == "Y" && $("#terbakar_sel").is(":checked") === true){
+				$("#terbakar_sel").iCheck('toggle');
+			}
+		}
+		getPetak(objDataSpta.PETAK);
+		getTara(objDataSpta.TRUK);
+		getPta(objDataSpta.PTA);
+	}
+}
+
+
 function cekha(a){
 if('<?php echo CNF_COMPANYCODE;?>' == 'N007'){
 if(a > 0.9){
