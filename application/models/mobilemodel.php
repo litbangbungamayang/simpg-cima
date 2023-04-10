@@ -105,4 +105,28 @@ class Mobilemodel extends CI_Model
     return json_encode($resp);
   }
 
+  public function premi(){
+    $query = "select * from t_premi_penalti where jenis = ?";
+    $result_premi = $this->db->query($query, array("PREMI"))->result();
+    $resp = (object) [
+          'success' => true,
+          'code' => 200,
+          'data' => $result_premi,
+          'message' => 'success get data premi' 
+        ];
+    return json_encode($resp);
+  }
+
+  public function penalti(){
+    $query = "select * from t_premi_penalti where jenis = ?";
+    $result_premi = $this->db->query($query, array("PENALTI"))->result();
+    $resp = (object) [
+          'success' => true,
+          'code' => 200,
+          'data' => $result_premi,
+          'message' => 'success get data penalti' 
+        ];
+    return json_encode($resp);
+  }
+
 }

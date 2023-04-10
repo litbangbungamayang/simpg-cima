@@ -45,4 +45,14 @@ class M_api extends SB_Controller
 		$this->load->model('mobilemodel');
 		echo $this->mobilemodel->pta($persno);
 	}
+
+	function premi(){
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->premi();
+	}
+
+	function penalti(){
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->penalti();
+	}
 }
