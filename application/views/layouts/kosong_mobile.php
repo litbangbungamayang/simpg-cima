@@ -26,7 +26,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
   JsBarcode(".barcode").init();
-	setTimeout(function () {updateStatusCetak();}, 500);
+	setTimeout(function(){
+      updateStatusCetak();
+      }, 500);
 });
 
 function updateStatusCetak(){
@@ -35,11 +37,11 @@ function updateStatusCetak(){
             url: "<?php echo site_url('tkuotaspta/updatestatuscetak');?>",
             data: {tgl_spta:"<?php echo $tgl;?>",pta:"<?php echo $pta;?>",kat:"<?php echo $kat;?>",afd:"<?php echo $afd;?>",petak:"<?php echo $petak;?>"},
             success: function (data) {
-                //if(data=='ok'){
-					  // setTimeout(function () { window.print();}, 2000);
-                  //setTimeout(function () { window.close();}, 3000);
-				//}
-				
+					   //setTimeout(function () { window.print();}, 2000);
+                  //setTimeout(function () { window.close();}, 3000);		
+                  window.print();
+                  window.location.href = "<? echo site_url('tselektor_mobile'); ?>";
+                  //window.history.back();
             }
         });
 }

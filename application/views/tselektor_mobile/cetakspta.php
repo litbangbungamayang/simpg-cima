@@ -40,18 +40,30 @@
 							<tr><td width="25%">PTA</td><td><b><? echo $row->nama_pta;?></b></td></tr>
 							<tr><td width="25%">NO TRUK/SOPIR</td><td><b><? echo $row->no_angkutan." / ".$row->ptgs_angkutan;?></b></td></tr>
 							<tr><td width="25%">HEKTAR TEBANG</td><td><b><? echo $row->ha_tertebang;?> &nbsp ha</b></td></tr>
-							<tr><td width="25%">JAM TEBANG</td><td><b><? echo $row->tgl_tebang;?></b></td></tr>
-							<tr><td width="25%">JENIS TEBU</td><td><b><? echo ($row->terbakar_sel == 1) ? "TERBAKAR" : "HIJAU";?></b></td></tr>
 						</tbody>
 					</table>
 				</td>
 				<td>
 					<table width="100%">
 						<tbody>
-							<tr><td width="25%">OPR GRAB LOADER</td><td><b><? echo $row->op_gl;?></b></td></tr>
+							<tr><td width="25%">JAM TEBANG</td><td><b><? echo $row->tgl_tebang;?></b></td></tr>
+							<tr><td width="25%">JENIS TEBU</td><td><b><? echo ($row->terbakar_sel == 1) ? "TERBAKAR" : "HIJAU";?></b></td></tr>
 							<tr><td width="25%">NOMOR GL</td><td><b><? echo $row->no_gl;?></b></td></tr>
-							<tr><td width="25%">OPR HARVESTER</td><td><b><? echo $row->op_hv;?></b></td></tr>
 							<tr><td width="25%">NOMOR HARVESTER</td><td><b><? echo $row->no_hv;?></b></td></tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<table border="1" width="100%" cellspacing="0" cellpadding="0" style="font-family:;font-size:12px;">
+		<tbody>
+			<tr>
+				<td width="100%">
+					<table width="100%">
+						<tbody>
+							<tr><td width="25%">DISTRIBUSI SPTA DIGITAL</td><td></td></tr>
+							<tr><td width="25%">dicetak pada: <b><?php echo date('d-m-Y H:i:s')?></b></td></tr>
 						</tbody>
 					</table>
 				</td>
