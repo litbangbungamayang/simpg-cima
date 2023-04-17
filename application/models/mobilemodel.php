@@ -129,4 +129,28 @@ class Mobilemodel extends CI_Model
     return json_encode($resp);
   }
 
+  public function gl(){
+    $query = "select * from t_gl_harvester where jenis = ?";
+    $result_gl = $this->db->query($query, array("GL"))->result();
+    $resp = (object) [
+          'success' => true,
+          'code' => 200,
+          'data' => $result_gl,
+          'message' => 'success get data grab loader' 
+        ];
+    return json_encode($resp);
+  }
+
+  public function harvester(){
+    $query = "select * from t_gl_harvester where jenis = ?";
+    $result_hv = $this->db->query($query, array("HARVESTER"))->result();
+    $resp = (object) [
+          'success' => true,
+          'code' => 200,
+          'data' => $result_hv,
+          'message' => 'success get data harvester' 
+        ];
+    return json_encode($resp);
+  }
+
 }

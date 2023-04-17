@@ -55,4 +55,15 @@ class M_api extends SB_Controller
 		$this->load->model('mobilemodel');
 		echo $this->mobilemodel->penalti();
 	}
+
+	function gl(){
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->gl();
+	}
+
+	function harvester(){
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->harvester();
+	}
+	
 }
