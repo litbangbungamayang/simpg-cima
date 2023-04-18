@@ -145,6 +145,7 @@
 							<input type="text" name="op_hv" id="op_hv" style="display:none" />
 							<input type="text" name="no_st_gl" id="no_st_gl" style="display:none" />
 							<input type="text" name="op_st_gl" id="op_st_gl" style="display:none" />
+							<input type="text" name="posisi" id="posisi" style="display:none" />
 						</div>
 						<div style="clear:both"></div>
 						<div class="toolbar-line text-center">
@@ -353,7 +354,7 @@ function bacaQrcode(e, qrcode){
 				break;
 		}
 		$("#tgl_tebang").val(tgl_tebang_str);
-		$("#jam_tebang").val(objDataSpta.TIME);
+		$("#jam_tebang").val(objDataSpta.JAM_TEBANG);
 		$("#no_angkutan").val(objDataSpta.TRUK);
 		$("#kode_petak").val(objDataSpta.PETAK);
 		$("#hektar_tertebang").val(objDataSpta.LUAS);
@@ -362,6 +363,9 @@ function bacaQrcode(e, qrcode){
 		$("#trainstat_input").val(objDataSpta.PREMI + "," + objDataSpta.PENALTI);
 		$("#kat_tebangan").val("TAPG");
 		$("#persno").val(objDataSpta.PTA);
+		$("#tgl_do").val(objDataSpta.DATE);
+		$("#jam_do").val(objDataSpta.TIME);
+		$("#posisi").val(objDataSpta.POS);
 		if(objDataSpta.HIJAU == "N" && $("#terbakar_sel").is(":checked") === false){
 			$("#terbakar_sel").iCheck('toggle');
 		} else {

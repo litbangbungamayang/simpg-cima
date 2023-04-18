@@ -240,7 +240,32 @@ class Tselektor_mobile extends SB_Controller
 				'jarak_id' => 1,
 				'jenis_spta' => "TRUK"
 			);
-			//var_dump($dataSpta); die();
+			$dataSubmit = array(
+				'kode_petak' => $data["kode_blok"],
+				'persno_pta' => $data["persno"],
+				'nomor_truk' => $data["no_angkutan"],
+				'sisteb' => $jenis_tebangan,
+				'tgl_tiket' => $data["tgl_do"],
+				'jam_tiket' => $data["jam_do"],
+				'tgl_tebang' => $data["tgl_tebang"],
+				'jam_tebang' => $data["jam_tebang"],
+				'posisi' => $data["posisi"],
+				'luas' => $data["ha_tertebang"],
+				'hijau' => $data["terbakar_sel"],
+				'premi_penalti' => $data["no_trainstat"],
+				'no_gl' => $data["no_st_gl"],
+				'no_harvester' => $data["no_hv"] 
+			);
+			//var_dump($dataSubmit); die();
+			$query = "select count(*) as jml from t_submit_qr where kode_petak = ? and tgl_tiket = ? and jam_tiket = ?";
+			$result = $this->db->query($query, array($data["kode_blok"], $data["tgl_do"], $data["jam_do"]))->result();
+			if($result[0]->jml > 1){
+				header("Location: ".site_url('tselektor_mobile'));
+				$this->session->set_flashdata('errors', 'Data SPTA tersebut sudah pernah masuk sebelumnya!');
+				die();
+			};
+			var_dump($result[0]->jml); die();
+			$this->db->insert('t_submit_qr', $dataSubmit);
 			$this->db->insert('t_spta', $dataSpta);
 			$insert_id_spta = $this->db->insert_id();
 			
@@ -303,9 +328,9 @@ class Tselektor_mobile extends SB_Controller
 				$i=0;
 			}
 			$i++;
-			//var_dump($html);
+			
 		}
-		
+		//var_dump($wh); die();
 		$this->data['content'] = $html;
 		$this->data['title'] = 'Cetak SPTA';
 		$this->data['tgl'] = $tgl_spta;
