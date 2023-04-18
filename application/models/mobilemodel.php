@@ -90,7 +90,8 @@ class Mobilemodel extends CI_Model
   }
 
   public function pta($persno){
-    $query = "select mkar.* from t_pta_mobile ptam1
+    $query = "select mkar.id_karyawan, mkar.Persno, mkar.company_code, mkar.plant_kode, mkar.name, mkar.id_jabatan 
+        from t_pta_mobile ptam1
         left outer join t_pta_mobile ptam2 on ptam1.wilayah = ptam2.wilayah
         join sap_m_karyawan mkar on mkar.Persno = ptam2.persno
       where ptam1.persno = ? and mkar.id_jabatan = 3";
@@ -98,6 +99,7 @@ class Mobilemodel extends CI_Model
     $resp = (object) [
           'success' => true,
           'code' => 200,
+          'primary_key' => 'id_karyawan',
           'data' => $result_pta,
           'message' => 'success get data PTA' 
         ];
