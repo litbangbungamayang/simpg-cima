@@ -76,7 +76,7 @@ class Mobilemodel extends CI_Model
   }
 
   public function truk($persno_pta){
-    $query = "select tara.no_pol, tara.nama_supir 
+    $query = "select tara.no_pol, tara.nama_supir, relasi.persno as persno_pta 
       from m_tara_truk tara
         join t_relasi_truk_pta relasi on relasi.no_pol = tara.no_pol
       where relasi.persno = ?";
