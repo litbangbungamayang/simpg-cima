@@ -79,7 +79,7 @@ class Mobilemodel extends CI_Model
     $query = "select tara.no_pol, tara.nama_supir, relasi.persno as persno_pta 
       from m_tara_truk tara
         join t_relasi_truk_pta relasi on relasi.no_pol = tara.no_pol";
-    $result_truk = $this->db->query($query, array($persno_pta))->result();
+    $result_truk = $this->db->query($query)->result();
     $resp = (object) [
           'success' => true,
           'code' => 200,
