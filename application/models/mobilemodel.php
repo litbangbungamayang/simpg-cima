@@ -90,11 +90,16 @@ class Mobilemodel extends CI_Model
   }
 
   public function pta($persno){
-    $query = "select mkar.id_karyawan, mkar.Persno, mkar.company_code, mkar.plant_kode, mkar.name, mkar.id_jabatan 
+    /*$query = "select mkar.id_karyawan, mkar.Persno, mkar.company_code, mkar.plant_kode, mkar.name, mkar.id_jabatan 
         from t_pta_mobile ptam1
         left outer join t_pta_mobile ptam2 on ptam1.wilayah = ptam2.wilayah
         join sap_m_karyawan mkar on mkar.Persno = ptam2.persno
       where ptam1.persno = ? and mkar.id_jabatan = 3";
+    */
+    $query = "select kary.* from t_pta_mobile mob
+      join t_pta_wilayah wil on mob.wilayah = wil.wilayah
+      join sap_m_karyawan kary on kary.Persno = wil.Persno
+      where mob.persno = ?";
     $result_pta = $this->db->query($query, array($persno))->result();
     $resp = (object) [
           'success' => true,
