@@ -16,13 +16,20 @@
 					<ul class="parsley-error-list">
 						<?php echo $this->session->flashdata('errors');?>
 					</ul>
+					<?
+						if($this->session->flashdata('qr_error')){
+							echo "<div class='alert alert-danger'>";
+							echo "<strong>Error!</strong> ".$this->session->flashdata('qr_error');
+							echo "</div>";
+						}
+					?>
 					<form action="<?php echo site_url('tselektor_mobile/save'); ?>" class='form-vertical' parsley-validate='true' id="frmSelektor" novalidate="false" method="post" enctype="multipart/form-data" >
 						<div class="row">
 							<!-- Blok data SPTA -->
 							<div class="col-md-6">
 								<div class="form-group col-md-12" >
 									<label for="ipt" class=" control-label "> Scan QR Code  <span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' placeholder='letakkan cursor disini untuk scan QR CODE'  id='no_spta' autocomplete="off" onkeyup="bacaQrcode(event,this.value)"  required />
+									<input type='text' class='form-control input-sm' placeholder='Letakkan cursor disini untuk scan QR'  id='no_spta' autocomplete="off" onkeyup="bacaQrcode(event,this.value)"  required />
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> Tgl Tebang  <span class="asterix"> * </span>  </label>
@@ -124,11 +131,11 @@
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="form-group  col-md-6" >
-									<label for="ipt" class=" control-label "> Jenis Angkutan  <span class="asterix"> * </span>  </label>
+								<div class="form-group  col-md-5" >
+									<label for="ipt" class=" control-label "> Angkutan  <span class="asterix"> * </span>  </label>
 									<input type='text' class='form-control input-sm' readonly  id='jenis_angkutan'  required />
 								</div>
-								<div class="form-group  col-md-6" >
+								<div class="form-group  col-md-7" >
 									<label for="ipt" class=" control-label "> Jenis Tebangan  <span class="asterix"> * </span>  </label>
 									<input type='text' class='form-control input-sm' readonly  name="jenis_tebangan" id='jenis_tebangan'  required />
 								</div>

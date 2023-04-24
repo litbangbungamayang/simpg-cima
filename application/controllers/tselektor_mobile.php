@@ -259,12 +259,12 @@ class Tselektor_mobile extends SB_Controller
 			//var_dump($dataSubmit); die();
 			$query = "select count(*) as jml from t_submit_qr where kode_petak = ? and tgl_tiket = ? and jam_tiket = ?";
 			$result = $this->db->query($query, array($data["kode_blok"], $data["tgl_do"], $data["jam_do"]))->result();
-			if($result[0]->jml > 1){
+			if($result[0]->jml > 0){
 				header("Location: ".site_url('tselektor_mobile'));
-				$this->session->set_flashdata('errors', 'Data SPTA tersebut sudah pernah masuk sebelumnya!');
+				$this->session->set_flashdata('qr_error', 'Data SPTA tersebut sudah pernah masuk sebelumnya!');
 				die();
 			};
-			var_dump($result[0]->jml); die();
+			//TODO: LANJUTKAN PROSES SUBMIT DATA MENTAH QR
 			$this->db->insert('t_submit_qr', $dataSubmit);
 			$this->db->insert('t_spta', $dataSpta);
 			$insert_id_spta = $this->db->insert_id();
