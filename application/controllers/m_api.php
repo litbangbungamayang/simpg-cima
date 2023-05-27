@@ -40,7 +40,7 @@ class M_api extends SB_Controller
 	}
 
 	function pta(){
-		$persno = $this->input->get('Persno');
+		$persno = $this->input->get('persno');
 		$this->load->model('mobilemodel');
 		echo $this->mobilemodel->pta($persno);
 	}
