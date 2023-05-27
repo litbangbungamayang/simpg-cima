@@ -159,4 +159,16 @@ class Mobilemodel extends CI_Model
     return json_encode($resp);
   }
 
+  public function versi(){
+    $query = "select *, CONCAT(major,'.',minor,'.',patch) as txt from t_versi_mobile where tgl_versi = (select max(tgl_versi) from t_versi_mobile)";
+    $result_versi = $this->db->query($query)->row();
+    $resp = (object) [
+        'success' => true,
+        'code' => 200,
+        'versi' => $result_versi->txt,
+        'message' => 'success get versi'
+      ];
+    return json_encode($resp);
+  }
+
 }

@@ -65,4 +65,8 @@ class M_api extends SB_Controller
 		echo $this->mobilemodel->harvester();
 	}
 	
+	function versi(){
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->versi();
+	}
 }
