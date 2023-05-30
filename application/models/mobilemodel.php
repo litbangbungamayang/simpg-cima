@@ -75,6 +75,12 @@ class Mobilemodel extends CI_Model
     return json_encode($resp);
   }
 
+  public function buka_petak($kode_blok){
+    $query = "update sap_field set spt_status = 1, spt_tgl = CURRENT_TIMESTAMP() where kode_blok = ? ";
+    $result = $this->db->query($query, array($kode_blok))->result();
+    return json_encode($result);
+  }
+
   public function truk(){
     $query = "select tara.no_pol, tara.nama_supir, relasi.persno as persno_pta 
       from m_tara_truk tara

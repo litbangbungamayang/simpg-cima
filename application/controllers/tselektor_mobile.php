@@ -254,7 +254,8 @@ class Tselektor_mobile extends SB_Controller
 				'hijau' => $data["terbakar_sel"],
 				'premi_penalti' => $data["no_trainstat"],
 				'no_gl' => $data["no_st_gl"],
-				'no_harvester' => $data["no_hv"] 
+				'no_harvester' => $data["no_hv"],
+				'username' => $data["username"] 
 			);
 			//var_dump($dataSubmit); die();
 			$query = "select count(*) as jml from t_submit_qr where kode_petak = ? and tgl_tiket = ? and jam_tiket = ?";

@@ -153,6 +153,7 @@
 							<input type="text" name="no_st_gl" id="no_st_gl" style="display:none" />
 							<input type="text" name="op_st_gl" id="op_st_gl" style="display:none" />
 							<input type="text" name="posisi" id="posisi" style="display:none" />
+							<input type="text" name="username" id="username" style="display:none" />
 						</div>
 						<div style="clear:both"></div>
 						<div class="toolbar-line text-center">
@@ -373,6 +374,7 @@ function bacaQrcode(e, qrcode){
 		$("#tgl_do").val(objDataSpta.DATE);
 		$("#jam_do").val(objDataSpta.TIME);
 		$("#posisi").val(objDataSpta.POS);
+		$("#username").val(objDataSpta.USERNAME);
 		if(objDataSpta.HIJAU == "N" && $("#terbakar_sel").is(":checked") === false){
 			$("#terbakar_sel").iCheck('toggle');
 		} else {
