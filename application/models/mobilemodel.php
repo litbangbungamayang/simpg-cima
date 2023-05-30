@@ -77,7 +77,7 @@ class Mobilemodel extends CI_Model
 
   public function buka_petak($kode_blok){
     $query = "update sap_field set spt_status = 1, spt_tgl = CURRENT_TIMESTAMP() where kode_blok = ? ";
-    $result = $this->db->query($query, array($kode_blok))->result();
+    $result = $this->db->query($query, array($kode_blok));
     return json_encode($result);
   }
 
