@@ -39,13 +39,13 @@
 									<label for="ipt" class=" control-label "> Jam  <span class="asterix"> * </span>  </label>
 									<input type='text' max="5" class='form-control input-sm' name='jam_tebang' id='jam_tebang' placeholder="06:00"  required readonly/>
 								</div>
-								<div class="form-group col-md-6" style="display:none">
+								<div class="form-group col-md-6" style="">
 									<label for="ipt" class=" control-label ">Brix<span class="asterix"> * </span></label>
-									<input type='number' value="0" class='form-control input-sm' name='brix_sel'  required />
+									<input type='number' value="0" class='form-control input-sm' name='brix_sel' id='brix_sel'  required />
 								</div>
-								<div class="form-group col-md-6" style="display:none">
+								<div class="form-group col-md-6" style="">
 									<label for="ipt" class=" control-label "> Ph  <span class="asterix"> * </span>  </label>
-									<input type='number' value="0" class='form-control input-sm' name='ph_sel'  required />
+									<input type='number' value="0" class='form-control input-sm' name='ph_sel'  id='ph_sel' required />
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> Luas Tebang <span class="asterix"> * </span>  </label>
@@ -227,6 +227,22 @@ function getPetak(kodePetak){
 	}
 }
 
+function getBrix(kodePetak){
+	if(kodePetak != ''){
+		$.ajax({
+			type: 'POST',
+			url: "<?php echo site_url('tselektor_mobile/cekBrix');?>",
+			data: {kode_petak:kodePetak},
+			dataType: 'json',
+			success: function (data) {
+				random_ph = 5 + Math.random();
+				$("#brix_sel").val(data.h_brix);
+				$("#ph_sel").val(random_ph);
+			}
+		});
+	}
+}
+
 function getPta(kodePta){
 	if(kodePta != ''){
 		$.ajax({
@@ -385,6 +401,7 @@ function bacaQrcode(e, qrcode){
 		getPetak(objDataSpta.PETAK);
 		getTara(objDataSpta.TRUK);
 		getPta(objDataSpta.PTA);
+		getBrix(objDataSpta.PETAK);
 	}
 }
 

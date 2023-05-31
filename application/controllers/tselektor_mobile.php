@@ -409,6 +409,16 @@ class Tselektor_mobile extends SB_Controller
 		}
 	}
 
+	function cekBrix(){
+		if(isset($_POST['kode_petak'])){
+			$kode_petak = $_POST['kode_petak'];
+			$petak = $this->db->query("select * from sap_field_spt where no_petak = '".$kode_petak."'")->row();
+			if($petak){
+				echo json_encode($petak);
+			}
+		}
+	}
+
 	function cekPta(){
 		if(isset($_POST['kodePta'])){
 			$kodePta = $_POST['kodePta'];
