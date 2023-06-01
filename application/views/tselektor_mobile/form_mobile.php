@@ -49,7 +49,7 @@
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> Luas Tebang <span class="asterix"> * </span>  </label>
-									<input type='number' onkeyup="cekha(this.value)" class='form-control input-sm' name='ha_tertebang' id="hektar_tertebang"  required readonly/>
+									<input type='number' onkeyup="cekha(this.value)" class='form-control input-sm' name='ha_tertebang' id="hektar_tertebang"  required />
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> No Angkutan   <span class="asterix"> * </span>  </label>
