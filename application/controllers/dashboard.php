@@ -136,7 +136,7 @@ class Dashboard extends SB_Controller {
     	$this->load->model('dashboardtimbanganmodel');
     	$this->model = $this->dashboardtimbanganmodel;
     	$htm_header = '<table class="table"><thead><tr>
-        		<th style="padding: 0 0 0 7px;">RAYON</th>
+        		<th style="padding: 0 0 0 7px;"></th>
             	<th style="text-align:right">ANTRIAN</th>
             	<th style="text-align:right; padding: 0 5px 0 5px">CANEYARD</th>
                 <th style="padding: 0 5px 0 5px;text-align:right">TOTAL</th>
@@ -162,7 +162,7 @@ class Dashboard extends SB_Controller {
             	if ($row->rayon == "RY LIT"){
                 	$nama_rayon = "LITBANG";
                 } else {
-                	$nama_rayon = $row->rayon;
+                	$nama_rayon = "Wil. ".$row->rayon;
                 }
             	$htm_content .= '<tr>
                 	<td style="padding:0 0 0 7px;">'.$nama_rayon.'</td>
@@ -231,10 +231,11 @@ class Dashboard extends SB_Controller {
       $this->load->model('dashboardtimbanganmodel');
     	$this->model = $this->dashboardtimbanganmodel;
     	$htm_header = '<table class="table"><thead><tr>
-        		<th style="padding: 0 0 0 7px;">RAYON</th>
+        		<th style="padding: 0 0 0 7px;"></th>
             	<th style="text-align:right">MANUAL</th>
-            	<th style="text-align:right; padding: 0 5px 0 5px">SEMI MEKANIS</th>
-                <th style="padding: 0 5px 0 5px;text-align:right">MEKANIS</th>
+            	<th style="text-align:right; padding: 0 5px 0 5px">SEMI</th>
+                <th style="padding: 0 5px 0 5px;text-align:right">MEKA</th>
+                <th style="padding: 0 5px 0 5px;text-align:right">TRAN</th>
             	<th style="text-align:right; padding: 0 7 0 0px;">TOTAL</th>
             </tr></thead>';
     	$content = $this->model->getDataSisteb($tgl);
@@ -248,6 +249,9 @@ class Dashboard extends SB_Controller {
     	$mekanis_ts = 0;
     	$mekanis_tr = 0;
     	$mekanis_tsi = 0;
+    	$trans_ts = 0;
+    	$trans_tr = 0;
+    	$trans_tsi = 0;
     	$netto_ts = 0.00;
     	$netto_tr = 0.00;
     	$netto_tsi = 0.00;
@@ -257,13 +261,14 @@ class Dashboard extends SB_Controller {
             	if ($row->rayon == "RY LIT"){
                 	$nama_rayon = "LITBANG";
                 } else {
-                	$nama_rayon = $row->rayon;
+                	$nama_rayon = "Wil. ".$row->rayon;
                 }
             	$htm_content .= '<tr >
                 	<td style="padding:0 0 0 7px;">'.$nama_rayon.'</td>
                     <td style="text-align:right;">'.number_format($row->manual,2).'</td>
                     <td style="text-align:right; padding: 0 10px 0 5px">'.number_format($row->semi_mekanis,2).'</td>
                     <td style="text-align:right; padding: 0 10px 0 5px">'.number_format($row->mekanis,2).'</td>
+                    <td style="text-align:right; padding: 0 10px 0 5px">'.number_format($row->transloading,2).'</td>
                     <td style="text-align:right; padding:0 0 0 0px;">'.number_format($row->netto,2).'</td>
                 </tr>';
             	switch ($row->tstr){
@@ -271,18 +276,21 @@ class Dashboard extends SB_Controller {
                 		$manual_ts += $row->manual;
                 		$semi_mekanis_ts += $row->semi_mekanis;
                 		$mekanis_ts += $row->mekanis;
+                		$trans_ts += $row->transloading;
                 		$netto_ts += $row->netto;
                 		break;
                 	case 'TR' :
                 		$manual_tr += $row->manual;
                 		$semi_mekanis_tr += $row->semi_mekanis;
                 		$mekanis_tr += $row->mekanis;
+                		$trans_tr += $row->transloading;
                 		$netto_tr += $row->netto;
                 		break;
                 	case 'TSI' :
                 		$manual_tsi += $row->manual;
                 		$semi_mekanis_tsi += $row->semi_mekanis;
                 		$mekanis_tsi += $row->mekanis;
+                		$trans_tsi += $row->transloading;
                 		$netto_tsi += $row->netto;
                 		break;
                 }
@@ -292,6 +300,7 @@ class Dashboard extends SB_Controller {
                     	<td style="text-align:right;">'.number_format($manual_ts,2).'</td>
                     	<td style="text-align:right; padding: 0 10px 0 5px">'.number_format($semi_mekanis_ts,2).'</td>
                     	<td style="text-align:right; padding: 0 10px 0 5px">'.number_format($mekanis_ts,2).'</td>
+                        <td style="text-align:right; padding: 0 10px 0 5px">'.number_format($trans_ts,2).'</td>
                     	<td style="text-align:right;">'.number_format($netto_ts,2).'</td>
                 	</tr>';
         	$htm_content .= '<tr style="font-weight:bold;background:#929292;color:white">
@@ -299,6 +308,7 @@ class Dashboard extends SB_Controller {
                     	<td style="text-align:right;">'.number_format($manual_tr,2).'</td>
                     	<td style="text-align:right; padding: 0 10px 0 5px">'.number_format($semi_mekanis_tr,2).'</td>
                     	<td style="text-align:right; padding: 0 10px 0 5px">'.number_format($mekanis_tr,2).'</td>
+                        <td style="text-align:right; padding: 0 10px 0 5px">'.number_format($trans_tr,2).'</td>
                     	<td style="text-align:right;">'.number_format($netto_tr,2).'</td>
                 	</tr>';
         	$htm_content .= '<tr style="font-weight:bold;background:#B6B6B6;">
@@ -306,13 +316,15 @@ class Dashboard extends SB_Controller {
                     	<td style="text-align:right;">'.number_format($manual_tsi,2).'</td>
                     	<td style="text-align:right; padding: 0 10px 0 5px">'.number_format($semi_mekanis_tsi,2).'</td>
                     	<td style="text-align:right; padding: 0 10px 0 5px">'.number_format($mekanis_tsi,2).'</td>
+                        <td style="text-align:right; padding: 0 10px 0 5px">'.number_format($trans_tsi,2).'</td>
                     	<td style="text-align:right;">'.number_format($netto_tsi,2).'</td>
                 	</tr>';
         	$htm_content .= '<tr style="font-weight:bold; color:white; background:black;">
                 		<td style="padding: 0 0 0 7px;">Total Pasok</td>
-                    	<td style="text-align:right;">'.number_format(($manual_ts + $manual_tr + $manual_tsi),2).'</td>
+                    	<td style="text-align:right;">'.number_format(($manual_ts + $manual_tr + $manual_tsi ),2).'</td>
                     	<td style="text-align:right; padding: 0 10px 0 5px">'.number_format(($semi_mekanis_ts + $semi_mekanis_tr + $semi_mekanis_tsi),2).'</td>
                     	<td style="text-align:right; padding: 0 10px 0 5px">'.number_format(($mekanis_ts + $mekanis_tr + $mekanis_tsi),2).'</td>
+                        <td style="text-align:right; padding: 0 10px 0 5px">'.number_format(($trans_ts + $trans_tr + $trans_tsi),2).'</td>
                     	<td style="text-align:right;">'.number_format(($netto_ts + $netto_tr + $netto_tsi),2).'</td>
                 	</tr>';
         } else {

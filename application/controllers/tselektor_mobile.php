@@ -220,6 +220,14 @@ class Tselektor_mobile extends SB_Controller
 					break;
 			}
 			//------------------------
+			//------------ CEK ZONA ANGKUT ------------------
+			$query = "select jarak.id_jarak from m_biaya_jarak jarak join t_relasi_zona zona on jarak.kode_jarak = zona.kode_jarak where zona.kode_blok=?";
+        	$result = $this->db->query($query,array($data["kode_blok"]))->result();
+        	$id_jarak = 0;
+        	if(sizeof($result) > 0){
+            	$id_jarak = $result[0]->id_jarak;
+            }
+			//-----------------------------------------------
 			$dataSpta = array(
 				'kode_plant' => CNF_PLANCODE,
 				'kode_blok' => $data["kode_blok"],
@@ -237,27 +245,12 @@ class Tselektor_mobile extends SB_Controller
 				'buat_spta_status' => 1,
 				'buat_spta_tgl' => date('Y-m-d H:i:s'),
 				'vendor_angkut' => 1,
-				'jarak_id' => 1,
+				'jarak_id' => $id_jarak,
 				'jenis_spta' => "TRUK"
 			);
-			$dataSubmit = array(
-				'kode_petak' => $data["kode_blok"],
-				'persno_pta' => $data["persno"],
-				'nomor_truk' => $data["no_angkutan"],
-				'sisteb' => $jenis_tebangan,
-				'tgl_tiket' => $data["tgl_do"],
-				'jam_tiket' => $data["jam_do"],
-				'tgl_tebang' => $data["tgl_tebang"],
-				'jam_tebang' => $data["jam_tebang"],
-				'posisi' => $data["posisi"],
-				'luas' => $data["ha_tertebang"],
-				'hijau' => $data["terbakar_sel"],
-				'premi_penalti' => $data["no_trainstat"],
-				'no_gl' => $data["no_st_gl"],
-				'no_harvester' => $data["no_hv"],
-				'username' => $data["username"] 
-			);
+			
 			//var_dump($dataSubmit); die();
+			
 			$query = "select count(*) as jml from t_submit_qr where kode_petak = ? and tgl_tiket = ? and jam_tiket = ?";
 			$result = $this->db->query($query, array($data["kode_blok"], $data["tgl_do"], $data["jam_do"]))->result();
 			if($result[0]->jml > 0){
@@ -266,9 +259,28 @@ class Tselektor_mobile extends SB_Controller
 				die();
 			};
 			//TODO: LANJUTKAN PROSES SUBMIT DATA MENTAH QR
-			$this->db->insert('t_submit_qr', $dataSubmit);
+			
 			$this->db->insert('t_spta', $dataSpta);
 			$insert_id_spta = $this->db->insert_id();
+        	$dataSubmit = array(
+                'kode_petak' => $data["kode_blok"],
+                'persno_pta' => $data["persno"],
+                'nomor_truk' => $data["no_angkutan"],
+                'sisteb' => $jenis_tebangan,
+                'tgl_tiket' => $data["tgl_do"],
+                'jam_tiket' => $data["jam_do"],
+                'tgl_tebang' => $data["tgl_tebang"],
+                'jam_tebang' => $data["jam_tebang"],
+                'posisi' => $data["posisi"],
+                'luas' => $data["ha_tertebang"],
+                'hijau' => $data["terbakar_sel"],
+                'premi_penalti' => $data["no_trainstat"],
+                'no_gl' => $data["no_st_gl"],
+                'no_harvester' => $data["no_hv"],
+                'username' => $data["username"],
+            	'id_spta' => $insert_id_spta
+            );
+        	$this->db->insert('t_submit_qr', $dataSubmit);
 			
 			/* ============ INSERT DATA SELEKTOR ============== */
 			$tgl_tebang = $data["tgl_tebang"] . " " . $data["jam_tebang"] . ":00";

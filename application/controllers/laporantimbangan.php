@@ -91,7 +91,10 @@ class Laporantimbangan extends SB_Controller
                 $title = "SEMI";
             }else if($metode_tma == 3){
                 $title = "MEKANISASI";
-            }         
+            }
+       	 	else if($metode_tma == 4){
+                $title = "TRANSLOADING";
+            }
 			$this->data['title'] .= 	" METODE TMA ".$title;
 		}
 
@@ -106,7 +109,7 @@ class Laporantimbangan extends SB_Controller
 			}
 	//(SELECT MIN(tgl_timbang) as awal_tebang FROM t_spta WHERE kode_blok = a.`kode_blok`) as awal_tebang,
 		if($jns == 1){
-			if(CNF_COMPANYCODE == '7BCN'){
+			if(CNF_PLANCODE == 'SG04'){
 				$slfield = "b.no_hv,b.op_hv,b.no_stipping,b.op_stipping,b.no_gl,b.op_gl,";
 				$vn7 = "perpetakn7";	
 			}else{
@@ -129,7 +132,7 @@ d.others,
 INNER JOIN t_selektor b ON b.`id_spta`=a.`id`
 INNER JOIN t_timbangan c ON c.`id_spat`=a.`id`
 INNER JOIN sap_field d ON d.`kode_blok`=a.`kode_blok`
-INNER JOIN sap_m_varietas f ON f.`id_varietas` = d.`kode_varietas`
+INNER JOIN sap_m_varietas f ON f.`nama_varietas` = d.`kode_varietas`
 LEFT JOIN sap_petani e ON e.`id_petani_sap`=a.`id_petani_sap`  INNER JOIN sap_m_karyawan o 
     ON o.Persno = b.persno_mandor_tma
   INNER JOIN sap_m_karyawan w 
@@ -139,7 +142,7 @@ $result = $this->db->query($sql)->result();
 		$this->data['result'] = $result;
 		$this->load->view('laporantimbangan/'.$vn7,$this->data);
 		}else{
-			if(CNF_COMPANYCODE == '7BCN'){
+			if(CNF_PLANCODE == 'SG04'){
 				$slfield = "b.no_hv,b.op_hv,b.no_stipping,b.op_stipping,b.no_gl,b.op_gl,";
 				$vn7 = "persptan7";	
 			}else{
@@ -150,7 +153,7 @@ $result = $this->db->query($sql)->result();
 d.`luas_ha`,SUM(b.ha_tertebang) AS tertebang, c.lokasi_timbang_1 AS lokasi_tembang_1, c.lokasi_timbang_2 AS lokasi_tembang_2,
 c.`netto_final` AS netto, c.lokasi_timbang_1,c.lokasi_timbang_2,
 a.stt_ta,
-IF (a.metode_tma = 1, \"MANUAL\", IF (a.metode_tma = 2 , \"SEMI MEKANISASI\", IF(a.metode_tma = 3, \"MEKANISASI\", ''))) AS metode_tma,
+IF (a.metode_tma = 1, \"MANUAL\", IF (a.metode_tma = 2 , \"SEMI MEKANISASI\", IF(a.metode_tma = 3, \"MEKANISASI\", 'TRANSLOADING'))) AS metode_tma,
   s.`kode_jarak`,
   s.`keterangan`,
   IF(b.`terbakar_sel` = 1, 'TERBAKAR', IF(b.`terbakar_sel` = 0, \"HIJAU\", \"-\")) AS terbakar_sel,

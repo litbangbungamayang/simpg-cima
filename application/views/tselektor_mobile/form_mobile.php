@@ -68,7 +68,7 @@
 								</div>
 								<div class="form-group col-md-12" >
 									<label for="ipt" class=" control-label "> Kode Premi/Penalti    </label>
-									<input type='text' class='form-control input-sm' placeholder=''  name='no_trainstat'  id= "trainstat_input" value="" readonly/>
+									<input type='text' class='form-control input-sm' placeholder=''  name='no_trainstat'  id= "trainstat_input" value="" />
 								</div>
 								<div class="col-md-6">
 									<div class="checkbox">
@@ -377,14 +377,22 @@ function bacaQrcode(e, qrcode){
 				sisteb = "MEKANIS";
 				break;
 		}
-		$("#tgl_tebang").val(tgl_tebang_str);
+		$("#tgl_tebang").val(objDataSpta.TGL_TEBANG);
 		$("#jam_tebang").val(objDataSpta.JAM_TEBANG);
 		$("#no_angkutan").val(objDataSpta.TRUK);
 		$("#kode_petak").val(objDataSpta.PETAK);
 		$("#hektar_tertebang").val(objDataSpta.LUAS);
 		$("#jenis_tebangan").val(sisteb);
 		$("#jenis_angkutan").val("TRUK");
-		$("#trainstat_input").val(objDataSpta.PREMI + "," + objDataSpta.PENALTI);
+    	premi = "";
+    	penalti = "";
+    	if(objDataSpta.PREMI !== undefined){
+        	premi = objDataSpta.PREMI + ", ";
+        }
+    	if(objDataSpta.PENALTI !== undefined){
+        	penalti = objDataSpta.PENALTI;
+        }
+		$("#trainstat_input").val(premi + penalti);
 		$("#kat_tebangan").val("TAPG");
 		$("#persno").val(objDataSpta.PTA);
 		$("#tgl_do").val(objDataSpta.DATE);
@@ -401,7 +409,7 @@ function bacaQrcode(e, qrcode){
 		getPetak(objDataSpta.PETAK);
 		getTara(objDataSpta.TRUK);
 		getPta(objDataSpta.PTA);
-		getBrix(objDataSpta.PETAK);
+    	getBrix(objDataSpta.PETAK);
 	}
 }
 
