@@ -139,18 +139,24 @@
 									<label for="ipt" class=" control-label "> Jenis Tebangan  <span class="asterix"> * </span>  </label>
 									<input type='text' class='form-control input-sm' readonly  name="jenis_tebangan" id='jenis_tebangan'  required />
 								</div>
-								<div class="form-group col-md-12" >
+								<div class="form-group col-md-12" style="display:none">
 									<label for="ipt" class=" control-label "> Kategori Tebangan  <span class="asterix"> * </span>  </label>
 									<input type='text' class='form-control input-sm' readonly  id='kat_tebangan'  required />
+								</div>
+								<div class="form-group col-md-6">
+									<label for="ipt" class=" control-label "> No. GL<span class="asterix"> * </span>  </label>
+									<input type='text' class='form-control input-sm' readonly  name="no_st_gl" id="no_st_gl"  required />
+								</div>
+								<div class="form-group col-md-6">
+									<label for="ipt" class=" control-label "> No. Harvester<span class="asterix"> * </span>  </label>
+									<input type='text' class='form-control input-sm' readonly  name="no_hv" id="no_hv" required />
 								</div>
 							</div>
 							<!-- Hidden blok -->
 							<input type="text" name="persno" id="persno" style="display:none" />
 							<input type="text" name="tgl_do" id="tgl_do" style="display:none" />
 							<input type="text" name="jam_do" id="jam_do" style="display:none" />
-							<input type="text" name="no_hv" id="no_hv" style="display:none" />
 							<input type="text" name="op_hv" id="op_hv" style="display:none" />
-							<input type="text" name="no_st_gl" id="no_st_gl" style="display:none" />
 							<input type="text" name="op_st_gl" id="op_st_gl" style="display:none" />
 							<input type="text" name="posisi" id="posisi" style="display:none" />
 							<input type="text" name="username" id="username" style="display:none" />
@@ -386,13 +392,25 @@ function bacaQrcode(e, qrcode){
 		$("#jenis_angkutan").val("TRUK");
     	premi = "";
     	penalti = "";
+		no_gl = "";
+		no_hv = "";
     	if(objDataSpta.PREMI !== undefined){
         	premi = objDataSpta.PREMI + ", ";
         }
     	if(objDataSpta.PENALTI !== undefined){
         	penalti = objDataSpta.PENALTI;
         }
+		//---------- PARAMETER TERBALIK ! -------------
+		if(objDataSpta.OP_HV !== undefined){
+			no_gl = objDataSpta.OP_HV;
+		}
+		if(objDataSpta.OP_GL !== undefined){
+			no_hv = objDataSpta.OP_GL;
+		}
+		//---------------------------------------------
 		$("#trainstat_input").val(premi + penalti);
+		$("#no_st_gl").val(no_gl);
+		$("#no_hv").val(no_hv);
 		$("#kat_tebangan").val("TAPG");
 		$("#persno").val(objDataSpta.PTA);
 		$("#tgl_do").val(objDataSpta.DATE);
