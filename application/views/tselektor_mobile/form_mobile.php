@@ -145,11 +145,11 @@
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> No. GL<span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' readonly  name="no_st_gl" id="no_st_gl"  required />
+									<input type='text' class='form-control input-sm' readonly  name="no_st_gl" id="no_st_gl"   />
 								</div>
 								<div class="form-group col-md-6">
 									<label for="ipt" class=" control-label "> No. Harvester<span class="asterix"> * </span>  </label>
-									<input type='text' class='form-control input-sm' readonly  name="no_hv" id="no_hv" required />
+									<input type='text' class='form-control input-sm' readonly  name="no_hv" id="no_hv"  />
 								</div>
 							</div>
 							<!-- Hidden blok -->
