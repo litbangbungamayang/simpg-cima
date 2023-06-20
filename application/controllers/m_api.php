@@ -40,6 +40,12 @@ class M_api extends SB_Controller
 		echo $this->mobilemodel->buka_petak($kode_blok);
 	}
 
+	function aff_petak(){
+		$kode_blok = $this->input->get('kode_blok');
+		$this->load->model('mobilemodel');
+		echo $this->mobilemodel->aff_petak($kode_blok);
+	}
+
 	function truk(){
 		$this->load->model('mobilemodel');
 		echo $this->mobilemodel->truk();
