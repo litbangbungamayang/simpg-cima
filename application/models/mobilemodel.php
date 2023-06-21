@@ -183,13 +183,15 @@ class Mobilemodel extends CI_Model
     $query = "insert into t_tes_api (payload) values(?)";
     $result = $this->db->query($query,  array($payload))->result();
     $status = false;
-    http_response_code(500);
     if ($this->db->insert_id()){
       $status = true;
       http_response_code(200);
+    } else {
+      http_response_code(500);
     }
     $response = (object)[
-      'success' => $status
+      'success' => $status,
+      'msg' => "Delivered"
     ];
     return json_encode($response);
   }
