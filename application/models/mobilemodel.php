@@ -178,13 +178,13 @@ class Mobilemodel extends CI_Model
   }
 
   public function tes_api($payload){
-    header("Content-Type: application/json");
-    header("HTTP/1.1 200 OK");
     $query = "insert into t_tes_api (payload) values(?)";
     $result = $this->db->query($query,  array($payload))->result();
     $status = false;
     if ($this->db->insert_id()){
       $status = true;
+      header("Content-Type: application/json");
+      header("HTTP/1.1 200 OK");
       http_response_code(200);
     } else {
       http_response_code(500);
