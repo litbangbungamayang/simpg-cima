@@ -177,4 +177,14 @@ class Mobilemodel extends CI_Model
     return json_encode($resp);
   }
 
+  public function tes_api($payload){
+    $query = "insert into t_tes_api (payload) values(?)";
+    $result = $this->db->query($query,  array($payload))->result();
+    $status = false;
+    if ($this->db->insert_id()){
+      $status = true;
+    }
+    return json_encode($status);
+  }
+
 }
