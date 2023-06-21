@@ -183,13 +183,13 @@ class Mobilemodel extends CI_Model
     $status = false;
     if ($this->db->insert_id()){
       $status = true;
-      http_response_code(500);
+      http_response_code(200);
     } else {
       http_response_code(500);
     }
     $response = (object)[
       'success' => $status,
-      'msg' => "Delivered"
+      'msg' => $payload
     ];
     return json_encode($response);
   }
