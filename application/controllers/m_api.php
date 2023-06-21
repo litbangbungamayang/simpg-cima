@@ -50,7 +50,7 @@ class M_api extends SB_Controller
 		$payload = $this->input->get('payload');
 		$this->load->model('mobilemodel');
 		(($this->mobilemodel->tes_api($payload)));
-		echo json_encode("OKOKOKOKOK");
+		var_dump(json_encode("OKOKOKOKOK"));
 	}
 
 	function truk(){
