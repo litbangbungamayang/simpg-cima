@@ -51,7 +51,7 @@ class M_api extends SB_Controller
 		$this->load->model('mobilemodel');
 		//header("Content-Type: application/json");
 		//echo $this->mobilemodel->tes_api($payload);
-		//http_response_code(200);
+		http_response_code(200);
 		echo "HALO";
 	}
 
