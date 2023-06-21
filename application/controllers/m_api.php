@@ -47,12 +47,12 @@ class M_api extends SB_Controller
 	}
 
 	function tes_api(){
-		$payload = $this->input->getPost('payload');
+		$payload = $this->input->get('payload');
 		$this->load->model('mobilemodel');
 		//header("Content-Type: application/json");
 		//echo $this->mobilemodel->tes_api($payload);
-		http_response_code(200);
-		echo "HALO";
+		//http_response_code(200);
+		echo json_encode("OK");
 	}
 
 	function truk(){
