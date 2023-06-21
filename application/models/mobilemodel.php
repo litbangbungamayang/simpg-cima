@@ -183,7 +183,7 @@ class Mobilemodel extends CI_Model
     $status = false;
     if ($this->db->insert_id()){
       $status = true;
-      http_response_code(200);
+      http_response_code(500);
     } else {
       http_response_code(500);
     }
