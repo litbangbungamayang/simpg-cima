@@ -47,6 +47,7 @@ class M_api extends SB_Controller
 	}
 
 	function tes_api(){
+		header("Content-Type: application/json");
 		$payload = $this->input->get('payload');
 		$this->load->model('mobilemodel');
 		echo (($this->mobilemodel->tes_api($payload)));
