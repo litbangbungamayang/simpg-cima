@@ -48,9 +48,8 @@ class M_api extends SB_Controller
 
 	function tes_api(){
 		$payload = $this->input->post('payload');
-		//$payload = $_POST['payload'];
 		$this->load->model('mobilemodel');
-		/*
+		
 		if($this->mobilemodel->tes_api($payload)){
 			$response = array(
 				"kode" => 200,
@@ -59,14 +58,14 @@ class M_api extends SB_Controller
 			http_response_code(200);
 			echo json_encode($response);
 		}
-		*/
 		
+		/*
 		$response = array(
 			"kode" => "200",
 			"deskripsi" => $payload
 		);
 		echo json_encode($response);
-		
+		*/
 	}
 
 	function truk(){
