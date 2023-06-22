@@ -191,6 +191,11 @@ class Mobilemodel extends CI_Model
       'success' => $status,
       'msg' => $payload
     ];
+    $response = array(
+			"kode" => "200",
+			"deskripsi" => "OK"
+		);
+		//echo json_encode($response);
     return json_encode($response);
   }
 
