@@ -56,7 +56,7 @@ class M_api extends SB_Controller
 				"status" => true
 			);
 			http_response_code(200);
-			echo json_encode($response);
+			echo json_encode("KESANA");
 		} else {
 			echo json_encode("KESINI");
 		}
