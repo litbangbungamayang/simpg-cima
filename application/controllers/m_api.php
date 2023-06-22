@@ -59,6 +59,7 @@ class M_api extends SB_Controller
 
 	function getDataAff(){
 		$payload = $this->input->post('payload');
+		var_dump($payload); die();
 		$this->load->model('mobilemodel');
 		$result = $this->mobilemodel->tes_api($payload);
 		$response = array(
