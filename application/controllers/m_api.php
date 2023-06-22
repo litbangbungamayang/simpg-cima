@@ -59,7 +59,13 @@ class M_api extends SB_Controller
 
 	function getDataAff(){
 		$payload = $this->input->post('payload');
-		echo json_encode($payload);
+		$this->load->model('mobilemodel');
+		$result = $this->mobilemodel->tes_api($payload);
+		$response = array(
+			"kode" => "200",
+			"deskripsi" => $result
+		);
+		echo json_encode($response);
 	}
 
 	function truk(){
