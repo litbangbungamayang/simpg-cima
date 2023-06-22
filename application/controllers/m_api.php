@@ -49,9 +49,14 @@ class M_api extends SB_Controller
 	function tes_api(){
 		$payload = $this->input->get('payload');
 		$this->load->model('mobilemodel');
-		http_response_code(200);
-		//header("Content-Type: application/json");
-		echo $this->mobilemodel->tes_api($payload);
+		if($this->mobilemodel->tes_api($payload)){
+			$response = array(
+				"kode" => 200,
+				"status" => true
+			);
+			http_response_code(200);
+			echo json_encode($response);
+		}
 		/*
 		$response = array(
 			"kode" => "200",
