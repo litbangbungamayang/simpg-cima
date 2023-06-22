@@ -62,7 +62,7 @@ class M_api extends SB_Controller
 		
 		$response = array(
 			"kode" => "200",
-			"deskripsi" => "OK"
+			"deskripsi" => $payload
 		);
 		echo json_encode($response);
 		
