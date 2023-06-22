@@ -60,7 +60,9 @@ class M_api extends SB_Controller
 	function getDataAff(){
 		$payload = $this->input->post('payload');
 		$this->load->model('mobilemodel');
-		$result = $this->mobilemodel->tes_api($payload);
+		$payload_decode = json_decode($payload);
+		$kode_blok = $payload_decode->kode_blok;
+		$result = $this->mobilemodel->tes_api($kode_blok);
 		$response = array(
 			"kode" => "200",
 			"deskripsi" => $result
