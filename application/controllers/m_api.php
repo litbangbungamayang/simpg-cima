@@ -52,7 +52,11 @@ class M_api extends SB_Controller
 		//header("Content-Type: application/json");
 		//echo $this->mobilemodel->tes_api($payload);
 		http_response_code(200);
-		echo json_encode("MASUK");
+		$response = array(
+			"kode" => "200",
+			"deskripsi" => "OK"
+		);
+		echo json_encode($response);
 	}
 
 	function truk(){
