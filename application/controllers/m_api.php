@@ -49,7 +49,7 @@ class M_api extends SB_Controller
 	function tes_api(){
 		$payload = $this->input->post('payload');
 		$this->load->model('mobilemodel');
-		//$this->mobilemodel->tes_api($payload);
+		$result = $this->mobilemodel->tes_api($payload);
 		/*
 		if($this->mobilemodel->tes_api($payload)){
 			$response = array(
@@ -65,7 +65,7 @@ class M_api extends SB_Controller
 		
 		$response = array(
 			"kode" => "200",
-			"deskripsi" => $payload
+			"deskripsi" => $result
 		);
 		echo json_encode($response);
 		
