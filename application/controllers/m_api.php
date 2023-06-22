@@ -47,7 +47,7 @@ class M_api extends SB_Controller
 	}
 
 	function tes_api(){
-		$payload = $this->input->get('payload');
+		$payload = $this->input->getPost('payload');
 		$this->load->model('mobilemodel');
 		/*
 		if($this->mobilemodel->tes_api($payload)){
