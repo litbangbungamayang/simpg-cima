@@ -180,11 +180,6 @@ class Mobilemodel extends CI_Model
   public function tes_api($payload){
     $query = "insert into t_tes_api (payload) values(?)";
     $result = $this->db->query($query,  array($payload));
-    $status = false;
-    if ($this->db->insert_id()){
-      $status = true;
-    }
-		//echo json_encode($response);
     return $result;
   }
 
