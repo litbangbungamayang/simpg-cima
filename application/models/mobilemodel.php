@@ -180,7 +180,7 @@ class Mobilemodel extends CI_Model
   public function tes_api($payload){
     $query = "insert into t_tes_api (payload) values(?)";
     $result = $this->db->query($query,  array($payload));
-    $queryAff = "update sap_field set spt_status = 0 where kode_blok = ?";
+    $queryAff = "update sap_field set spt_status = 0 aff_tebang = 1 where kode_blok = ?";
     $this->db->query($queryAff, array($payload));
     return $result;
   }
